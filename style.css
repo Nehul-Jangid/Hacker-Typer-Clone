@@ -1,0 +1,74 @@
+body {
+  background-color: #000;
+  color: #00ff00;
+  font-family: monospace;
+}
+.header {
+  background-color: #111;
+
+  padding: 20px 30px;
+  font-family: "Courier New", Courier, monospace;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid green;
+  flex-wrap: nowrap;
+}
+.stats {
+  display: flex;
+  justify-content: space-between;
+  width: 40%;
+}
+
+.abort {
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 10px 30px;
+  font-size: 18px;
+  font-family: "Courier New", monospace;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.2s;
+  letter-spacing: 1px;
+  font-weight: bold;
+}
+
+.abort:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px red;
+}
+.abort-active::after {
+  content: "ED!";
+}
+.abort-active {
+  color: red;
+  font-weight: bold;
+  font-size: 64px;
+  animation: blink 1s infinite;
+  letter-spacing: 10px;
+  position: absolute;
+  left: 45%;
+  top: 45%;
+}
+
+.code {
+  font-family: "Courier New", Courier, monospace; /* Monospace font for code */
+
+  background-color: #000000; /* Black background */
+  padding: 10px;
+  white-space: pre-wrap; /* Ensures proper wrapping for long lines */
+  line-height: 1.5;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1; /* Fully visible */
+  }
+  50% {
+    opacity: 0; /* Invisible at halfway */
+  }
+  100% {
+    opacity: 1; /* Fully visible again */
+  }
+}

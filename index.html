@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hacker Typer</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="header">
+      <div class="app-name">Console MK-XXVI</div>
+      <div class="stats">
+        <span id="cpu">CPU: <span class="cpu-usage">3</span>%</span>
+        <span id="memory">MEM: <span class="ram-usage">128</span>MB</span>
+        <span id="network"
+          >Network: <span class="network-status">Connected</span>
+        </span>
+        <span id="uptime">Uptime: <span class="uptime">42:13:56</span> </span>
+      </div>
+      <div class="controls">
+        <span class="abort" onclick="abort()">ABORT</span>
+      </div>
+    </div>
+    <div class="display">
+      <div class="code"></div>
+    </div>
+
+    <script src="jquery-3.7.1.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>
