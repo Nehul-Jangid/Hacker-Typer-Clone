@@ -2,21 +2,26 @@ body {
   background-color: #000;
   color: #00ff00;
   font-family: monospace;
+  padding-top: 82px;
+  scrollbar-width: 0;
 }
 .header {
   background-color: #111;
-
-  padding: 20px 30px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 20px 50px;
   font-family: "Courier New", Courier, monospace;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 2px solid green;
-  flex-wrap: nowrap;
+  z-index: 10000;
 }
 .stats {
   display: flex;
-  justify-content: space-between;
+  gap: 40px;
   width: 40%;
 }
 
@@ -24,7 +29,9 @@ body {
   background-color: red;
   color: white;
   border: none;
-  padding: 10px 30px;
+
+  width: 120px;
+  height: 40px;
   font-size: 18px;
   font-family: "Courier New", monospace;
   border-radius: 5px;
@@ -35,21 +42,33 @@ body {
 }
 
 .abort:hover {
-  transform: scale(1.1);
   box-shadow: 0 0 10px red;
 }
-.abort-active::after {
-  content: "ED!";
-}
+
 .abort-active {
-  color: red;
-  font-weight: bold;
+  color: rgb(255, 0, 0);
+
   font-size: 64px;
-  animation: blink 1s infinite;
-  letter-spacing: 10px;
-  position: absolute;
-  left: 45%;
-  top: 45%;
+  text-align: center;
+  letter-spacing: 5px;
+  position: fixed;
+  background: rgba(128, 128, 128, 0.336);
+  font-family: Haettenschweiler;
+  border: 3px solid rgb(126, 0, 0);
+  padding: 25px 30px;
+  z-index: 100;
+  backdrop-filter: blur(5px);
+}
+.abort-active-btn {
+  background-color: rgb(77, 77, 77);
+  cursor: not-allowed;
+}
+.abort-active-btn:hover {
+  transform: none;
+  box-shadow: none;
+}
+.abort-active-btn::after {
+  content: "ED!";
 }
 
 .code {
@@ -61,6 +80,58 @@ body {
   line-height: 1.5;
 }
 
+.overlay {
+  position: fixed;
+  top: 82px;
+  left: 0;
+
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(2px);
+  z-index: 100;
+}
+.access-granted {
+  /* font-weight: 600; */
+  font-size: 48px;
+  backdrop-filter: blur(5px);
+  letter-spacing: 5px;
+
+  background: rgba(128, 128, 128, 0.336);
+  font-family: Haettenschweiler;
+  border: 3px solid #008500;
+  padding: 25px;
+  z-index: 102;
+
+  text-align: center;
+}
+.access-denied {
+  /* font-weight: 600; */
+  font-size: 48px;
+  backdrop-filter: blur(5px);
+  letter-spacing: 5px;
+  color: red;
+  z-index: 102;
+
+  background: rgba(128, 128, 128, 0.336);
+  font-family: "Haettenschweiler";
+  border: 3px solid rgb(126, 0, 0);
+  padding: 25px;
+
+  text-align: center;
+}
+.center {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 @keyframes blink {
   0% {
     opacity: 1; /* Fully visible */
@@ -70,5 +141,50 @@ body {
   }
   100% {
     opacity: 1; /* Fully visible again */
+  }
+}
+
+.hidden {
+  display: none;
+}
+@media (max-width: 816px) {
+  #network,
+  #uptime {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  #network,
+  #uptime {
+    display: none;
+  }
+  .header {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .stats {
+    gap: 20px;
+    width: 40%;
+    margin-left: 30px;
+  }
+  .abort {
+    font-size: 12px;
+    height: 30px;
+    width: 80px;
+  }
+  .code {
+    font-size: 12px;
+    overflow-x: hidden;
+  }
+  .access-denied,
+  .access-granted,
+  .abort-active {
+    width: 80%;
+    font-size: 32px;
+    text-wrap: nowrap;
+  }
+  .abort-active {
+    font-size: 48px;
+    width: 70%;
   }
 }

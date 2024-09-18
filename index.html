@@ -8,7 +8,7 @@
   </head>
   <body>
     <div class="header">
-      <div class="app-name">Console MK-XXVI</div>
+      <div class="app-name">MK-XXVI</div>
       <div class="stats">
         <span id="cpu">CPU: <span class="cpu-usage">3</span>%</span>
         <span id="memory">MEM: <span class="ram-usage">128</span>MB</span>
@@ -18,11 +18,17 @@
         <span id="uptime">Uptime: <span class="uptime">42:13:56</span> </span>
       </div>
       <div class="controls">
-        <span class="abort" onclick="abort()">ABORT</span>
+        <button class="abort" onclick="abort()">ABORT</button>
       </div>
     </div>
     <div class="display">
       <div class="code"></div>
+    </div>
+    <div class="center hidden">
+      <div class="overlay hidden"></div>
+      <div class="abort-active hidden">ABORTED!</div>
+      <div class="access-granted hidden">ACCESS GRANTED</div>
+      <div class="access-denied hidden">ACCESS DENIED</div>
     </div>
 
     <script src="jquery-3.7.1.min.js"></script>

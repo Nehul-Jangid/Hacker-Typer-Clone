@@ -3,7 +3,10 @@
 let textAdded = "";
 let index = 0;
 let startTime = Date.now();
-let hackerCodeHTML = `#define WIN32_LEAN_AND_MEAN
+let charsTyped = 0;
+
+let locked = false;
+const hackerCodeHTML = `#define WIN32_LEAN_AND_MEAN
 #define CREATE_THREAD_ACCESS (PROCESS_CREATE_THREAD | PROCESS_QUERY_INFORMATION)
 
 BOOL Inject(DWORD pID, const char * DLL_NAME);
@@ -85,18 +88,39 @@ DWORD GetTargetThreadIDFromProcName(const char * ProcName)
 `;
 let aborted = false;
 
-console.log(hackerCodeHTML);
-
-$(document).keypress(function () {
+function app(e) {
   if (!aborted) {
-    let textToAdd = hackerCodeHTML.slice(index, index + 10);
-    index = index + 10;
-    textAdded += textToAdd;
+    if (!locked) {
+      charsTyped++;
+      let textToAdd = hackerCodeHTML.slice(index, index + 10);
+      index += 10;
+      textAdded += textToAdd;
 
-    $(".code").html(`<pre><code>${textAdded}</code></pre>`);
-    document
-      .querySelector(".code")
-      .scrollIntoView({ behavior: "smooth", block: "end" });
+      $(".code").html(`<pre><code>${textAdded}</code></pre>`);
+      document
+        .querySelector(".code")
+        .scrollIntoView({ behavior: "smooth", block: "end" });
+      if (charsTyped % 100 === 0) {
+        displayAccessStatus();
+      }
+    } else if (e.key === "Escape") {
+      addClassHidden(["center", "access-denied", "access-granted", "overlay"]);
+
+      locked = false;
+    }
+  }
+}
+
+$(document).click(function (e) {
+  app(e);
+});
+$(document).keydown(function (e) {
+  app(e);
+});
+$(".overlay").click(function () {
+  if (!aborted) {
+    addClassHidden(["center", "access-denied", "access-granted", "overlay"]);
+    locked = false;
   }
 });
 
@@ -105,7 +129,7 @@ function updateCpuUsage() {
   $(".cpu-usage").text(randomUsage);
 }
 function updateRamUsage() {
-  let randomUsage = Math.trunc(Math.random() * 32000);
+  let randomUsage = Math.trunc(Math.random() * 32000) + 10000;
   $(".ram-usage").text(randomUsage);
 }
 function updateUptime() {
@@ -115,11 +139,41 @@ function updateUptime() {
 }
 
 function abort() {
-  $(".abort").removeClass("abort").addClass("abort-active");
-  $(".network-status").text("DISCONNECTED").css("color", "red");
+  aborted = true;
+  $(".abort").addClass("abort-active-btn");
+  $(".network-status").text("DISCONNECTED");
   $("body").css("color", "red");
+
+  removeClassHidden(["abort-active", "overlay", "center"]);
+  addClassHidden(["access-granted"]);
 }
 
-setInterval(updateCpuUsage, 1000);
-setInterval(updateRamUsage, 1000);
-setInterval(updateUptime, 1000);
+function displayAccessStatus() {
+  locked = true;
+  let random = Math.random();
+
+  if (random < 0.5) {
+    removeClassHidden(["center", "access-granted", "overlay"]);
+  } else {
+    removeClassHidden(["center", "access-denied", "overlay"]);
+  }
+}
+
+function updateScreen() {
+  updateCpuUsage();
+  updateRamUsage();
+  updateUptime();
+}
+
+function removeClassHidden(array) {
+  for (const element of array) {
+    $("." + element).removeClass("hidden");
+  }
+}
+function addClassHidden(array) {
+  for (const element of array) {
+    $("." + element).addClass("hidden");
+  }
+}
+
+setInterval(updateScreen, 1000);
