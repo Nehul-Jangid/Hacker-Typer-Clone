@@ -864,12 +864,11 @@ function app(e) {
       let textToAdd = hackerCodeHTML.slice(index, index + 10);
       index += 10;
       textAdded += textToAdd;
-      document
-        .querySelector(".code")
-        .scrollIntoView({ behavior: "smooth", block: "end" });
+      
       $(".code").html(
         `<pre><code>${textAdded}</code> <span class="cursor">|</span></pre>`
       );
+      
 
       if (charsTyped % 150 === 0) {
         displayAccessStatus();
