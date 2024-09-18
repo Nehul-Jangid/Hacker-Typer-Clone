@@ -864,7 +864,9 @@ function app(e) {
       let textToAdd = hackerCodeHTML.slice(index, index + 10);
       index += 10;
       textAdded += textToAdd;
-      $(".code").scrollIntoView({ behavior: "smooth", block: "end" });
+      document
+        .querySelector(".code")
+        .scrollIntoView({ behavior: "smooth", block: "end" });
       $(".code").html(
         `<pre><code>${textAdded}</code> <span class="cursor">|</span></pre>`
       );
