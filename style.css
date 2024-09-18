@@ -6,6 +6,9 @@ body {
 
   overflow: hidden;
 }
+.cursor {
+  animation: blink 1s infinite linear;
+}
 .header {
   background-color: #111;
   position: fixed;

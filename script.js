@@ -865,7 +865,9 @@ function app(e) {
       index += 10;
       textAdded += textToAdd;
       $(".code").scrollIntoView({ behavior: "smooth", block: "end" });
-      $(".code").html(`<pre><code>${textAdded}</code></pre>`);
+      $(".code").html(
+        `<pre><code>${textAdded}</code> <span class="cursor">|</span></pre>`
+      );
 
       if (charsTyped % 150 === 0) {
         displayAccessStatus();
