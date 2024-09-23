@@ -868,7 +868,9 @@ function app(e) {
       $(".code").html(
         `<pre><code>${textAdded}</code> <span class="cursor">|</span></pre>`
       );
-      
+       document
+        .querySelector(".code")
+        .scrollIntoView({ behavior: "smooth", block: "end" });
 
       if (charsTyped % 150 === 0) {
         displayAccessStatus();
