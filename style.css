@@ -4,7 +4,10 @@ body {
   font-family: monospace;
   padding-top: 82px;
 
-  overflow: hidden;
+
+}
+body::-webkit-scrollbar {
+  display: none;
 }
 .cursor {
   animation: blink 1s infinite linear;
